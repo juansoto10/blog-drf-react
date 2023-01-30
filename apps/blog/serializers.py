@@ -19,7 +19,7 @@ class PostSerializer(serializers.ModelSerializer):
             'description',
             'excerpt',
             'category',
-            'author',
+            # 'author',
             'published',
             'status',
         ]

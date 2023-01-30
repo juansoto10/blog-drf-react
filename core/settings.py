@@ -58,7 +58,7 @@ THIRD_PARTY_APPS = [
     'ckeditor_uploader',
 ]
 
-INSTALLED_APPS = DJANGO_APPS +PROJECT_APPS + THIRD_PARTY_APPS
+INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_PARTY_APPS
 
 
 CKEDITOR_CONFIGS = {
@@ -122,11 +122,13 @@ DATABASES["default"]["ATOMIC_REQUESTS"] = True
 
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
+    'http://localhost:5500',
     'http://localhost:8000',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:3000',
+    'http://localhost:5500',
     'http://localhost:8000',
 ]
 
@@ -209,11 +211,10 @@ REST_FRAMEWORK = {
 }
 
 
-# REVISAR
-
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
+
 
 FILE_UPLOAD_PERMISSIONS = 0o640
 
