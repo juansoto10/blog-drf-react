@@ -1,5 +1,5 @@
 import LoadingCard from "components/loaders/LoadingCard"
-import SmallSetPagination from "components/paginacion/SmallSetPagination"
+import SmallSetPagination from "components/pagination/SmallSetPagination"
 import { useEffect } from "react"
 import { connect } from "react-redux"
 import BlogCard from "./BlogCard"
