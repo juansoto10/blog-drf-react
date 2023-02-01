@@ -1,36 +1,39 @@
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 import { Menu, Popover, Transition } from '@headlessui/react'
 import { SearchIcon } from '@heroicons/react/solid'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 import { NavLink } from 'react-router-dom'
 
-const user = {
-  name: 'Jeanne Goursaud',
-  email: 'jeanneg@example.com',
-  imageUrl:
-    'https://i.postimg.cc/qMz30bMM/jeanne1-square.jpg',
-}
 
 const navigation = [
-  { name: 'Blog', href: '/blog', current: true },
-  { name: 'About', href: '/about', current: false },
-  { name: 'Contact', href: '/contact', current: false },
+    { name: 'Blog', href: '/blog', current: true },
+    { name: 'About', href: '/about', current: false },
+    { name: 'Contact', href: '/contact', current: false },
 ]
 
-/* const userNavigation = [
-  { name: 'Your Profile', href: '#' },
-  { name: 'Settings', href: '#' },
-  { name: 'Sign out', href: '#' },
-] */
-
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+    return classes.filter(Boolean).join(' ')
 }
 
-
 function Navbar() {
+
+    // SEARCH
+    const [effectSearch, setEffectSearch] = useState(false);
+    const [term, setTerm]=useState('')
+
+    const handleChange=e=>{
+      setTerm(e.target.value)
+    }
+
+    const onSubmit= e =>{
+      e.preventDefault()
+      setTimeout(() => window.location.href=('/search/'+term), 0.2);
+      setTerm('')
+    }
+
+
     return (
-      <>
+        <>
       {/* When the mobile menu is open, add `overflow-hidden` to the `body` element to prevent double scrollbars */}
       <Popover
         as="header"
@@ -49,9 +52,9 @@ function Navbar() {
                   <div className="flex-shrink-0 flex items-center">
                     <NavLink to="/">
                       <img
-                        className="block h-8 w-auto rounded-full"
-                        src="https://i.postimg.cc/qMz30bMM/jeanne1-square.jpg"
-                        alt="Logo blog"
+                        className="block h-8 w-auto"
+                        src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=600"
+                        alt="Logo"
                       />
                     </NavLink>
                   </div>
@@ -59,23 +62,27 @@ function Navbar() {
 
                 <div className="min-w-0 flex-1 md:px-8 lg:px-0 xl:col-span-6">
                   <div className="flex items-center px-6 py-4 md:max-w-3xl md:mx-auto lg:max-w-none lg:mx-0 xl:px-0">
-                    <div className="w-full">
+                    <form onSubmit={e=>onSubmit(e)} className="w-full">
                       <label htmlFor="search" className="sr-only">
                         Search
                       </label>
                       <div className="relative">
-                        <div className="pointer-events-none absolute inset-y-0 left-0 pl-3 flex items-center">
+                        <button
+                        type="submit"
+                        className="pointer-events-none absolute inset-y-0 left-0 pl-3 flex items-center">
                           <SearchIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
-                        </div>
+                        </button>
                         <input
                           id="search"
                           name="search"
+                          required
+                          onChange={(e)=>{handleChange(e)}}
                           className="block w-full bg-white border border-gray-300 rounded-md py-2 pl-10 pr-3 text-sm placeholder-gray-500 focus:outline-none focus:text-gray-900 focus:placeholder-gray-400 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                           placeholder="Search"
                           type="search"
                         />
                       </div>
-                    </div>
+                    </form>
                   </div>
                 </div>
 
@@ -91,19 +98,16 @@ function Navbar() {
                   </Popover.Button>
                 </div>
 
-                {/* Right area Navbar */}
                 <div className="hidden lg:flex lg:items-center lg:justify-end xl:col-span-4">
-                  <NavLink to="/blog" className={`text-lg dark:hover:text-white hover:text-gray-900 text-gray-600 dark:text-dark-txt text-md font-semibold`}>
-                    Blog
-                  </NavLink>
-
-                  <NavLink to="/about" className={`mx-5 text-lg dark:hover:text-white hover:text-gray-900 text-gray-600 dark:text-dark-txt text-md font-semibold`}>
-                    About
-                  </NavLink>
-
-                  <NavLink to="/contact" className={`text-lg dark:hover:text-white hover:text-gray-900 text-gray-600 dark:text-dark-txt text-md font-semibold`}>
-                    Contact
-                  </NavLink>
+                    <NavLink to="/blog" className="text-lg dark:hover:text-white hover:text-gray-900 text-gray-600 dark:text-dark-txt text-md font-semibold">
+                        Blog
+                    </NavLink>
+                    <NavLink to="/about" className="mx-4 text-lg dark:hover:text-white hover:text-gray-900 text-gray-600 dark:text-dark-txt text-md font-semibold">
+                        About
+                    </NavLink>
+                    <NavLink to="/contact" className="text-lg dark:hover:text-white hover:text-gray-900 text-gray-600 dark:text-dark-txt text-md font-semibold">
+                        Contact
+                    </NavLink>
                 </div>
               </div>
             </div>
@@ -124,43 +128,12 @@ function Navbar() {
                   </NavLink>
                 ))}
               </div>
-
-              {/* <div className="border-t border-gray-200 pt-4 pb-3">
-                <div className="max-w-3xl mx-auto px-4 flex items-center sm:px-6">
-                  <div className="flex-shrink-0">
-                    <img className="h-10 w-10 rounded-full" src={user.imageUrl} alt="" />
-                  </div>
-                  <div className="ml-3">
-                    <div className="text-base font-medium text-gray-800">{user.name}</div>
-                    <div className="text-sm font-medium text-gray-500">{user.email}</div>
-                  </div>
-                  <button
-                    type="button"
-                    className="ml-auto flex-shrink-0 bg-white rounded-full p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  >
-                    <span className="sr-only">View notifications</span>
-                    <BellIcon className="h-6 w-6" aria-hidden="true" />
-                  </button>
-                </div>
-
-                <div className="mt-3 max-w-3xl mx-auto px-2 space-y-1 sm:px-4">
-                  {userNavigation.map((item) => (
-                    <a
-                      key={item.name}
-                      href={item.href}
-                      className="block rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900"
-                    >
-                      {item.name}
-                    </a>
-                  ))}
-                </div>
-              </div> */}
             </Popover.Panel>
           </>
         )}
       </Popover>
-      </>
+    </>
     )
-  }
-  
-  export default Navbar;
+}
+
+export default Navbar;
