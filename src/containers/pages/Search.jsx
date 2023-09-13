@@ -8,12 +8,12 @@ import BlogListSearch from "components/blog/BlogListSearch";
 function Search({
     search_blog,
     posts
-}){
+}) {
 
     const params = useParams()
     const term = params.term
 
-    useEffect(()=>{
+    useEffect(() => {
         search_blog(term)
     }, [])
 

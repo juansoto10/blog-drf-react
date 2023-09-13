@@ -17,17 +17,18 @@ function SmallSetPagination({ get_blog_list_page, blog_list, count }) {
     const previous_number = () => {
       // window.scrollTo(0, 0);
         if (currentPage !== 1) {
-            setCurrentPage(currentPage-1);
-            setActive(currentPage-1);
-            get_blog_list_page(currentPage-1)
+            setCurrentPage(currentPage - 1);
+            setActive(currentPage - 1);
+            get_blog_list_page(currentPage - 1)
         }
     };
 
-    const next_number = () => {window.scrollTo(0, 0);
-      if (currentPage !== Math.ceil(blog_list.length/3)) {
-          setCurrentPage(currentPage+1);
-          setActive(currentPage+1);
-          get_blog_list_page(currentPage+1)
+    const next_number = () => {
+      /* window.scrollTo(0, 0); */
+      if (currentPage !== Math.ceil(blog_list.length / 3)) {
+          setCurrentPage(currentPage + 1);
+          setActive(currentPage + 1);
+          get_blog_list_page(currentPage + 1)
       }
     };
 
@@ -77,7 +78,7 @@ function SmallSetPagination({ get_blog_list_page, blog_list, count }) {
           <div className="-mt-px w-0 flex-1 flex">
         
             <button
-              onClick={()=>{previous_number()}}
+              onClick={() => {previous_number()}}
               className="border-t-2 border-transparent pt-4 pr-1 inline-flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300"
             >
               <ArrowNarrowLeftIcon className="mr-3 h-5 w-5 text-gray-400" aria-hidden="true" />
@@ -89,7 +90,7 @@ function SmallSetPagination({ get_blog_list_page, blog_list, count }) {
 
           <div className="-mt-px w-0 flex-1 flex justify-end">
             <button
-              onClick={()=>{next_number()}}
+              onClick={() => {next_number()}}
               className="border-t-2 border-transparent pt-4 pl-1 inline-flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300"
             >
               Next

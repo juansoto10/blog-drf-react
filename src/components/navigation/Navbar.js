@@ -52,8 +52,8 @@ function Navbar() {
                   <div className="flex-shrink-0 flex items-center">
                     <NavLink to="/">
                       <img
-                        className="block h-8 w-auto"
-                        src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=600"
+                        className="block h-8 w-auto rounded-full"
+                        src="https://i.postimg.cc/qMz30bMM/jeanne1-square.jpg"
                         alt="Logo"
                       />
                     </NavLink>
